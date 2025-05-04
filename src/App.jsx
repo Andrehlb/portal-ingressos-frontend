@@ -1,5 +1,5 @@
 // src/App.jsx
-import ReactDOM from 'react-dom/client';
+import React from 'react'
 import { Routes, Route } from 'react-router-dom'
 import CadastroEvento from './pages/eventos/CadastroEvento'
 
