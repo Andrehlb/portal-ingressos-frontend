@@ -1,6 +1,6 @@
 // src/pages/eventos/CadastroEvento.jsx
 import React from "react";
-import EventoForm from "../../components/forms/EventoForm";
+import EventoForm from "../../componentes/forms/EventoForm";
 import { Card, CardContent } from "@/components/ui/card";
 
 export default function CadastroEvento() {
