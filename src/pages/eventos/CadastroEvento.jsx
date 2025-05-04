@@ -1,4 +1,43 @@
 // src/pages/eventos/CadastroEvento.jsx
+import React, { useState } from 'react';
+
+export default function CadastroEvento() {
+  const [evento, setEvento] = useState({
+    nome: '',
+    data: '',
+    local: ''
+  });
+
+  const handleChange = (e) => {
+    setEvento({ ...evento, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    alert(`Evento "${evento.nome}" cadastrado com sucesso!`);
+    // Aqui depois você pode integrar com o backend real.
+  };
+
+  return (
+    <div style={{ padding: '2rem' }}>
+      <h1>Cadastro de Evento</h1>
+      <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', maxWidth: '400px' }}>
+        <label>Nome do Evento:</label>
+        <input type="text" name="nome" value={evento.nome} onChange={handleChange} required />
+
+        <label>Data:</label>
+        <input type="date" name="data" value={evento.data} onChange={handleChange} required />
+
+        <label>Local:</label>
+        <input type="text" name="local" value={evento.local} onChange={handleChange} required />
+
+        <button type="submit" style={{ marginTop: '1rem' }}>Cadastrar</button>
+      </form>
+    </div>
+  );
+}
+
+/*
 import React from "react";
 import EventoForm from "../../components/forms/EventoForm";
 import { Card, CardContent } from "../../components/ui/card";
@@ -15,3 +54,4 @@ export default function CadastroEvento() {
     </div>
   );
 }
+*/
