@@ -10,6 +10,7 @@ export default function CadastroEvento() {
         <CardContent className="p-6">
           <h2 className="text-2xl font-bold mb-4">Cadastro de Evento</h2>
           <EventoForm />
+        </CardContent>
       </Card>
     </div>
   );
