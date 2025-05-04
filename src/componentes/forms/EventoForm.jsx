@@ -122,32 +122,15 @@ export default function EventoForm() {
           />
         </div>
       </div>
-      </div>        
-        {/* Seção 3: Horário */ }
-      <div className="grid md:grid-cols-2 gap-4">
-        <div>
-          <Label htmlFor="horario">Horário</Label>
-          <Input
-            id="horario"
-            name="horario"
-            type="time"
-            value={formData.horario}
-            onChange={handleChange}
-            required
-          />
-        </div>
+       {/* Botão de Envio */}
+      <div className="flex justify-end">
+       <Button
+         type="submit"
+         className="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-6 py-2 rounded-md"
+       >
+         Salvar Evento
+       </Button>
       </div>
-          </div >
-
-        {/* Botão de Envio */ }
-        < div className = "flex justify-end" >
-          <Button
-            type="submit"
-            className="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-6 py-2 rounded-md"
-          >
-            Salvar Evento
-          </Button>
-          </div >
-        </form >
-      );
-    }
+    </form>
+  );
+}
