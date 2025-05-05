@@ -1,8 +1,9 @@
 // src/App.jsx
 import React from 'react'
 import { Routes, Route, Link, Navigate } from 'react-router-dom';
+import Login from './pages/Login';
+import CadastroEvento from './pages/eventos/CadastroEvento';
 // import { Routes, Route } from 'react-router-dom'
-import CadastroEvento from './pages/eventos/CadastroEvento'
 // import { Navigate } from 'react-router-dom';
 
 export default function App() {
@@ -16,10 +17,14 @@ export default function App() {
     </nav>
     
     <Routes>
-      <Route path="/" element={<div>Página Inicial</div>} />
+      {/* Rota principal (raiz) página de entrada/login */}
+      <Route path="/" element={<Login />} />
+
+      {/* Página de cadastro de evento (acesso do gerente) */}
       <Route path="/eventos/cadastro" element={<CadastroEvento />} />
-      <Route path="/" element={<div>Página Inicial</div>} />
-      <Route path="*" element={<Navigate to="/eventos/cadastro" />} />
+
+      {/* Rota coringa para redirecionar qualquer outra rota não definida */}
+      <Route path="*" element={<Navigate to="/" />} />
     </Routes>
     </>
   );
