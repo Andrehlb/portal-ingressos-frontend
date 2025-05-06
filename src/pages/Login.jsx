@@ -24,7 +24,7 @@ export default function Login() {
 
     return (
         <div style={{ padding: '2rem' }}>
-            <h1>Acesso ao Portal</h1>
+            <h1>Comprar Ingressos</h1>
             <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', maxWidth: '400px' }}>
                 <label>Nome:</label>
                 <input type="text" required />
