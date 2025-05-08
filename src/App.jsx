@@ -19,6 +19,10 @@ export default function App() {
     </nav>
     
     <Routes>
+
+      {/* Rota para a página de (geral? Verificar) eventos (acesso do cliente) */}
+      <Route path="/eventos" element={<HomePage />} />
+
       {/* Rota principal (raiz) página de entrada/login */}
       <Route path="/" element={<Login />} />
 
