@@ -3,6 +3,8 @@ import React from 'react'
 import { Routes, Route, Link, Navigate } from 'react-router-dom';
 import Login from './pages/Login';
 import CadastroEvento from './pages/eventos/CadastroEvento';
+import HomePage from './pages/cliente/HomePage';
+
 // import { Routes, Route } from 'react-router-dom'
 // import { Navigate } from 'react-router-dom';
 
