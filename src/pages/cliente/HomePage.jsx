@@ -44,13 +44,35 @@ export default function HomePage() {
       </div>
 
       {/* Seçao de Cards/Categorias */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {categorias.map((categoria) => (
-          <div key={categoria.id} className="bg-white rounded-lg shadow p-6">
-            <h2 className="text-xl font-semibold mb-2">{categoria.nome}</h2>
-            <p className="text-gray-600">{categoria.descricao}</p>
+      <div className="max-w-6x1 mx-auto">
+        <h2 className="text-3xl font- text-center text-gray-800 mb-8">
+          Descrubra o Mundo de Eventos que Esperam por Você
+        </h2>
+          <p className="text-center text-gray-600 mb-12">
+            Shows, Palestras, Teatro, Esportes, Filmes e muito mais! Tudo ao Teu Alcance. 
+            <br> 
+            Nunca foi tão fácil participar e fazer presença </br>
+          </p>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+            {categorias.map((categoria, index) => (	
+              <div key={index} className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition">
+                <div className="p-6">
+                  <div className="bg-gray-200 h-48 rounded-lg mb-4 flex items-center justify-center text-gray-500">
+                    Imagem {categoria.nome}
+                  </div>
+                  <h3 className="text-xl font-bold text-gray-800 mb-2">{categoria.nome}</h3>
+                  <p className="text-gray-600 mb-4">{categoria.descricao}</p>
+                  <button className="w-full py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition">
+                    Explorar
+                  </button>
+                </div>
+              </div>
+            ))}
           </div>
-        ))}
+        </div>
+
+        
       </div>
     </div>
   );
