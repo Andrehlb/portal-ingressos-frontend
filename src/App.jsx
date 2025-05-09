@@ -20,6 +20,9 @@ export default function App() {
     
     <Routes>
 
+      {/* Importação do componente HomePage */}
+      <Route path="/" element={<HomePage />} />
+
       {/* Rota para a página de (geral? Verificar) eventos (acesso do cliente) */}
       <Route path="/eventos" element={<HomePage />} />
 
