@@ -23,6 +23,7 @@ dist-ssr
 *.sln
 *.sw?
 
-
+# Local .jsx files
+HomePage1.jsx
 HomePage2.jsx
 

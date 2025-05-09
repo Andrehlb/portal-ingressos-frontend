@@ -1,54 +1,50 @@
-// src/pages/eventos/EventosHome.jsx
-import React from "react";
+// src/pages/cliente/HomePage.jsx
+import React, { useState } from 'react';
 
-export default function EventosHome() {
+export default function HomePage() {
+  const [modalAberto, setModalAberto] = useState(false);
+
   return (
-    <div className="min-h-screen p-6 bg-gray-100">
-      <h1 className="text-3xl font-bold text-center mb-10">Encontre aqui, o teu Evento</h1>
+    <div className="min-h-screen bg-gray-100 p-6 flex flex-col items-center">
+      <h1 className="text-4xl font-bold text-gray-800 mb-8">Portal de Eventos</h1>
 
-      <div className="flex flex-row justify-around items-center">
-        {/* Card 1 */}
-        <div className="border border-gray-300 shadow-lg rounded-xl p-4 w-60 flex flex-col items-center bg-white">
-          <div className="bg-gray-200 h-40 w-full rounded-md mb-4"></div>
-          <h3 className="font-bold text-lg mb-2">Shows</h3>
-          <button className="px-4 py-2 bg-blue-500 text-white rounded">Explorar</button>
-        </div>
+      <button
+        onClick={() => setModalAberto(true)}
+        className="mb-6 px-6 py-2 bg-blue-600 text-white rounded-full shadow hover:bg-blue-700 transition"
+      >
+        Entrar / Cadastrar
+      </button>
 
-        {/* Card 2 */}
-        <div className="border border-gray-300 shadow-lg rounded-xl p-4 w-60 flex flex-col items-center bg-white">
-          <div className="bg-gray-200 h-40 w-full rounded-md mb-4"></div>
-          <h3 className="font-bold text-lg mb-2">Palestras</h3>
-          <button className="px-4 py-2 bg-blue-500 text-white rounded">Explorar</button>
-        </div>
+      {modalAberto && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
+          <div className="bg-white rounded-lg p-8 shadow-lg w-96">
+            <h2 className="text-2xl font-semibold mb-4 text-gray-700">Acesse sua conta</h2>
 
-        {/* Card 3 */}
-        <div className="border border-gray-300 shadow-lg rounded-xl p-4 w-60 flex flex-col items-center bg-white">
-          <div className="bg-gray-200 h-40 w-full rounded-md mb-4"></div>
-          <h3 className="font-bold text-lg mb-2">Teatro</h3>
-          <button className="px-4 py-2 bg-blue-500 text-white rounded">Explorar</button>
-        </div>
+            <input
+              type="email"
+              placeholder="Email"
+              className="w-full p-2 border border-gray-300 rounded mb-3"
+            />
 
-        {/* Card 4 */}
-        <div className="border border-gray-300 shadow-lg rounded-xl p-4 w-60 flex flex-col items-center bg-white">
-          <div className="bg-gray-200 h-40 w-full rounded-md mb-4"></div>
-          <h3 className="font-bold text-lg mb-2">Jogos</h3>
-          <button className="px-4 py-2 bg-blue-500 text-white rounded">Explorar</button>
-        </div>
+            <input
+              type="password"
+              placeholder="Senha"
+              className="w-full p-2 border border-gray-300 rounded mb-4"
+            />
 
-        {/* Card 5 */}
-        <div className="border border-gray-300 shadow-lg rounded-xl p-4 w-60 flex flex-col items-center bg-white">
-          <div className="bg-gray-200 h-40 w-full rounded-md mb-4"></div>
-          <h3 className="font-bold text-lg mb-2">Filmes</h3>
-          <button className="px-4 py-2 bg-blue-500 text-white rounded">Explorar</button>
-        </div>
+            <button className="w-full py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition mb-4">
+              Entrar
+            </button>
 
-        {/* Card 6 */}
-        <div className="border border-gray-300 shadow-lg rounded-xl p-4 w-60 flex flex-col items-center bg-white">
-          <div className="bg-gray-200 h-40 w-full rounded-md mb-4"></div>
-          <h3 className="font-bold text-lg mb-2">Eventos</h3>
-          <button className="px-4 py-2 bg-blue-500 text-white rounded">Explorar</button>
+            <button
+              className="w-full text-sm text-blue-600 hover:underline"
+              onClick={() => setModalAberto(false)}
+            >
+              Fechar
+            </button>
+          </div>
         </div>
-      </div>
+      )}
     </div>
   );
 }
