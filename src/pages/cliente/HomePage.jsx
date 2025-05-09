@@ -13,7 +13,7 @@ const categorias = [
 
 export default function HomePage() {
   return (
-    <div className="min-h-screen bg-gray-100 p-6">
+    <div className="min-h-screen bg-gray-100 p-6 flex flex-col items-center justify-center">
       <h1 className="text-4xl font-bold text-center mb-10 text-gray-800">
         Descubra seu tipo de evento
       </h1>
