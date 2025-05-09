@@ -4,7 +4,7 @@ import React from "react";
 export default function EventosHome() {
   return (
     <div className="min-h-screen p-6 bg-gray-100">
-      <h1 className="text-3xl font-bold text-center mb-10">Descubra o Mundo de Eventos</h1>
+      <h1 className="text-3xl font-bold text-center mb-10">Encontre aqui, o teu Evento</h1>
 
       <div className="flex flex-row justify-around items-center">
         {/* Card 1 */}
