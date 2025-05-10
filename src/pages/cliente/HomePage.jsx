@@ -22,14 +22,14 @@ export default function HomePage() {
 
         <div className="flex gap-4 mb-6">
           <button
-          onClick={ () => setTipoAcesso('cliente')}
-          className={`px-6 py-2 rounded-full shadow transition ${tipoAcesso === 'cliente' ? 'bg-blue-600 text-white' : 'bg-gray-200 text-gray-700'}`}
+            onClick={() => setTipoAcesso('cliente')}
+            className={`px-6 py-2 rounded-full shadow transition ${tipoAcesso === 'cliente' ? 'bg-blue-600 text-white' : 'bg-gray-200 text-gray-700'}`}
           >
             Acesso Cliente
           </button>
           <button
-          onClick={ () => setTipoAcesso('gerente')}
-          className={`px-6 py-2 rounded-full shadow transition ${tipoAcesso === 'gerente' ? 'bg-blue-600 text-white' : 'bg-gray-200 text-gray-700'}`}
+            onClick={() => setTipoAcesso('gerente')}
+            className={`px-6 py-2 rounded-full shadow transition ${tipoAcesso === 'gerente' ? 'bg-blue-600 text-white' : 'bg-gray-200 text-gray-700'}`}
           >
             Acesso Gerente
           </button>
@@ -48,32 +48,68 @@ export default function HomePage() {
         <h2 className="text-3xl font- text-center text-gray-800 mb-8">
           Descrubra o Mundo de Eventos que Esperam por Você
         </h2>
-          <p className="text-center text-gray-600 mb-12">
-            Shows, Palestras, Teatro, Esportes, Filmes e muito mais! Tudo ao Teu Alcance. 
-            <br> 
-            Nunca foi tão fácil participar e fazer presença </br>
-          </p>
+        <p className="text-center text-gray-600 mb-12">
+          Shows, Palestras, Teatro, Esportes, Filmes e muito mais! Tudo ao Teu Alcance. 
+          <br> 
+          Nunca foi tão fácil participar e fazer presença </br>
+        </p>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-            {categorias.map((categoria, index) => (	
-              <div key={index} className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition">
-                <div className="p-6">
-                  <div className="bg-gray-200 h-48 rounded-lg mb-4 flex items-center justify-center text-gray-500">
-                    Imagem {categoria.nome}
-                  </div>
-                  <h3 className="text-xl font-bold text-gray-800 mb-2">{categoria.nome}</h3>
-                  <p className="text-gray-600 mb-4">{categoria.descricao}</p>
-                  <button className="w-full py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition">
-                    Explorar
-                  </button>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+          {categorias.map((categoria, index) => (	
+            <div key={index} className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition">
+              <div className="p-6">
+                <div className="bg-gray-200 h-48 rounded-lg mb-4 flex items-center justify-center text-gray-500">
+                  Imagem {categoria.nome}
                 </div>
+                <h3 className="text-xl font-bold text-gray-800 mb-2">{categoria.nome}</h3>
+                <p className="text-gray-600 mb-4">{categoria.descricao}</p>
+                <button className="w-full py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition">
+                  Explorar
+                </button>
               </div>
-            ))}
-          </div>
+            </div>
+          ))}
         </div>
-
-
       </div>
-//    </div>
+
+      {/* Modal de Acesso/Login */}
+      {modalAberto && (
+        <div className="fixed inset-0 bg-black bg opacity-50 flex items-center justift-center z-50">
+          <div className="bg-white rounded-lg p-8 shadow-lg w-96">
+            <h2 className="text-2xl font-semibold mb-4 text-gray-700">
+              {tipoAcesso === 'cliente' ? 'Acesso Cliente' : 'Acesso Gerente'}
+            </h2>
+              
+              <input
+                type="email"
+                placeholder="Email"
+                className="w-full border border-gray-300 rounded mb-3"
+              />
+
+              <input
+                type="password"
+                placeholder="Senha"
+                className="w-full border border-gray-300 rounded mb-4"
+              />
+
+              <button className="w-full py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition mb-4">
+                Entrar
+              </button>
+
+              <div className="flex justify-between items-center">
+                <button className="text-sm text-blue-600 hover:underline">
+                  Criar conta
+                </button>
+                <button
+                  className="text-sm text-grey-600 hover:underline"
+                  onClick={() => setModalAberto(false)}
+                >
+                  Fechar
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
+    </div>
   );
 }
