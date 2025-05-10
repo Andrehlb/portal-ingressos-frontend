@@ -11,14 +11,14 @@ import HomePage from './pages/cliente/HomePage';
 export default function App() {
   return (
     <>
-    <nav>
-      <ul>
-        <li><Link to="/">Página Inicial</Link></li>
-        <li><Link to="/eventos/cadastro">Cadastro de Evento</Link></li>
-      </ul>
-    </nav>
-    
-    <Routes>
+      <nav className="bg-gray-800 text-white p-4">
+        <ul className="flex space-x-4">
+          <li><Link to="/" className="hover:underline">Página Inicial</Link></li>
+          <li><Link to="/eventos/cadastro" className="hover:underline">Cadastro de Evento</Link></li>
+        </ul>
+      </nav>
+
+      <Routes>
 
       {/* Importação do componente HomePage */}
       <Route path="/" element={<HomePage />} />
