@@ -26,8 +26,8 @@ export default function App() {
       {/* Rota para a página de (geral? Verificar) eventos (acesso do cliente) */}
       <Route path="/eventos" element={<HomePage />} />
 
-      {/* Rota principal (raiz) página de entrada/login */}
-      <Route path="/" element={<Login />} />
+      {/* Rota principal (raiz) página de entrada/login 
+      <Route path="/" element={<Login />} /> */}
 
       {/* Página de cadastro de evento (acesso do gerente) */}
       <Route path="/eventos/cadastro" element={<CadastroEvento />} />

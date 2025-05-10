@@ -3,8 +3,8 @@ import React from 'react'
 import ReactDOM from 'react-dom/client'
 import { BrowserRouter } from 'react-router-dom'
 // import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-// import App from './App.jsx';
-import App from './AppTeste.jsx';
+import App from './App.jsx';
+//import App from './AppTeste.jsx';
 // import CadastroEvento from './pages/eventos/CadastroEvento'
 import './index.css';
 
