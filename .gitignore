@@ -1,18 +1,32 @@
-# Logs
-logs
-*.log
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-pnpm-debug.log*
-lerna-debug.log*
+# Variáveis / Arquivos de ambiente
+.env
+.env.*
+!.env.example
+.env.local
+.env.development
+.env.test
+.env.production
 
-node_modules
-dist
-dist-ssr
+
+# Build
+dist/
+dist-ssr/
+build/
+.cache/
+.temp
 *.local
 
-# Editor directories and files
+
+# Dependências
+node_modules/
+.pnpm/
+.pnp/
+.pnp.js
+.npm
+.yarn-integrity
+
+
+# Editor IDE directories and files
 .vscode/*
 !.vscode/extensions.json
 .idea
@@ -24,37 +38,58 @@ dist-ssr
 *.sublime-project
 *.code-workspace
 *.tmproj
-.DS_Store
 *.suo
 *.ntvs*
 *.njsproj
 *.sln
 *.sw?
 
+
 # Local .jsx files
 HomePage1.jsx
 HomePage2.jsx
 
-# Dependências
-node_modules/
-.pnp/
-.pnp.js
-.DS_Store
 
-# Arquivos de ambiente
-.env
-.env.local
-.env.development
-.env.test
-.env.production
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
 
-# Build
-dist/
-build/
 
 # Sistema
 .DS_Store
 Thumbs.db
+Desktop.ini
 
 # Tailwind
 *.css.map
+
+# TypeScript
+*.tsbuildinfo
+
+# Testes
+coverage/
+.nyc_output/
+
+
+# Vite cache
+.cache/
+.temp/
+
+# Windows
+
+
+
+
+
+
+
+
+
+
+
+
