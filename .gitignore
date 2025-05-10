@@ -16,6 +16,14 @@ dist-ssr
 .vscode/*
 !.vscode/extensions.json
 .idea
+.idea/*
+*.iml
+*.swp
+*.swo
+*.sublime-workspace
+*.sublime-project
+*.code-workspace
+*.tmproj
 .DS_Store
 *.suo
 *.ntvs*
@@ -27,3 +35,26 @@ dist-ssr
 HomePage1.jsx
 HomePage2.jsx
 
+# Dependências
+node_modules/
+.pnp/
+.pnp.js
+.DS_Store
+
+# Arquivos de ambiente
+.env
+.env.local
+.env.development
+.env.test
+.env.production
+
+# Build
+dist/
+build/
+
+# Sistema
+.DS_Store
+Thumbs.db
+
+# Tailwind
+*.css.map
