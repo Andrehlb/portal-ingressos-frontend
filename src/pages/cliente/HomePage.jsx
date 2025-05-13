@@ -17,6 +17,19 @@ export default function HomePage() {
   return (
     <div className="min-h-screen bg-gray-100 p-6">
       {/* Cabeçalho */}
+      <header className="bg-gray-900 text-white flex justify-between items-center px-6 py-4 mb-4">
+        <nav className="flex gap-6">
+          <span className="text-lg font-semibold">Portal de Eventos</span>
+        </nav>
+
+        <button
+          onClick={() => setTipoAcesso('gerente') || setModalAberto(true)}
+          className="bg-gray-800 hover:bg-gray-700 text-sm px-4 py-2 rounded transition"
+        >
+          Acesso Gerente
+        </button>
+      </header>
+
       <div className="flex flex-col items-center mb-12">
         <h1 className="text-4xl font-bold text-gray-800 mb-4">Portal de Eventos</h1>
         {/* Botões de Acesso */}
@@ -26,12 +39,6 @@ export default function HomePage() {
             className={`px-6 py-2 rounded-full shadow transition ${tipoAcesso === 'cliente' ? 'bg-blue-600 text-white' : 'bg-gray-200 text-gray-700'}`}
           >
             Acesso Cliente
-          </button>
-          <button
-            onClick={() => setTipoAcesso('gerente')}
-            className={`px-6 py-2 rounded-full shadow transition ${tipoAcesso === 'gerente' ? 'bg-blue-600 text-white' : 'bg-gray-200 text-gray-700'}`}
-          >
-            Acesso Gerente
           </button>
         </div>
         <button
