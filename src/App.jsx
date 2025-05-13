@@ -29,7 +29,7 @@ export default function App() {
       {/* Rota principal (raiz) página de entrada/login 
       <Route path="/" element={<Login />} /> */}
 
-      {/* Página de cadastro de evento (acesso do gerente) */}
+      {/* Página de cadastro de evento (acesso do restrito) */}
       <Route path="/eventos/cadastro" element={<CadastroEvento />} />
 
       {/* Rota coringa para redirecionar qualquer outra rota não definida */}

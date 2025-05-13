@@ -3,16 +3,34 @@ import React, { useState } from 'react';
 
 export default function HomePage() {
   const [modalAberto, setModalAberto] = useState(false);
-  const [tipoAcesso, setTipoAcesso] = useState('cliente'); // 'cliente' ou 'gerente'
+  const [tipoAcesso, setTipoAcesso] = useState('cliente'); // usuário final
+  const [codigoAcesso, setCodigoAcesso] = useState(''); // código de acesso restrito (interno)
+  const [codigoValido, setCodigoValido] = useState(false); // código de acesso restrito válido
+  const [credenciais, setCredenciais] = useState({ email: '', senha: '' }); // credenciais de acesso restrito
 
   const categorias = [
-    { id: 1, nome: 'Shows', descricao: "Festivais de Música e Eventos Musicais" },
+    { id: 1, nome: 'Shows', descricao: "Festivais e Eventos Musicais" },
     { id: 2, nome: 'Palestras', descricao: "Eventos corporativos e Educacionais" },
-    { id: 3, nome: 'Teatro', descricao: "Peças Teatrais e Performance" },
+    { id: 3, nome: 'Teatro', descricao: "Peças Teatrais e Performances" },
     { id: 4, nome: 'Esportes', descricao: "Eventos Esportivos e Competições" },
     { id: 5, nome: 'Filmes', descricao: "Festivais de Cinema e Pré-Estréias" },
-    { id: 6, nome: 'Eventos', descricao: "Feiras e Exposições Diversas" },
+    { id: 6, nome: 'Eventos', descricao: "Feiras e Exposições Variados" },
   ];
+
+const handleRestritoLogin = () => {
+  // 🔌 Conexão: Aqui será validado com backend futuramente
+  if (codigoAcesso === 'restrito123') {
+    setCodigoValido(true);
+  } else {
+    alert('Código de acesso inválido!');
+  };
+
+const handleCredenciaisSubmit = () => {
+  // 🔌 Conexão: Aqui será validado com backend futuramente
+  console.log('Login restrito com:', credenciais);
+  // Redirecionar para a página/ painel restrito (exe: /restrito/dashboard)
+  window.location.href = '/restrito/dashboard';
+};
 
   return (
     <div className="min-h-screen bg-gray-100 p-6">
@@ -23,10 +41,10 @@ export default function HomePage() {
         </nav>
 
         <button
-          onClick={() => setTipoAcesso('gerente') || setModalAberto(true)}
+          onClick={() => setTipoAcesso('restrito') || setModalAberto(true)}
           className="bg-gray-800 hover:bg-gray-700 text-sm px-4 py-2 rounded transition"
         >
-          Acesso Gerente
+          Acesso Restrito
         </button>
       </header>
 
@@ -90,7 +108,7 @@ export default function HomePage() {
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
           <div className="bg-white rounded-lg p-8 shadow-lg w-96">
             <h2 className="text-2xl font-semibold mb-4 text-gray-700">
-              {tipoAcesso === 'cliente' ? 'Acesso Cliente' : 'Acesso Gerente'}
+              {tipoAcesso === 'cliente' ? 'Acesso Cliente' : 'Acesso restrito'}
             </h2>
             <input
               type="email"

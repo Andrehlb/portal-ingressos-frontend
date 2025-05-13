@@ -11,7 +11,7 @@ export default function Login() {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        if (codigo === 'gerente123') {
+        if (codigo === 'restrito123') {
             if (email && senha) {
                 navigate('/eventos/cadastro');
             } else {
@@ -32,9 +32,9 @@ export default function Login() {
                 <label>Código de acesso (se tiver):</label>
                 <input type="text" value={codigo} onChange={(e) => setCodigo(e.target.value)} />
 
-                {codigo === 'gerente123' && (
+                {codigo === 'restrito123' && (
                     <>
-                        <label>Email (gerente):</label>
+                        <label>Email (restrito):</label>
                         <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} required />
 
                         <label>Senha:</label>
