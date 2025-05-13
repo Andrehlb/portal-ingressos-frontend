@@ -39,14 +39,47 @@ const handleCredenciaisSubmit = () => {
         <nav className="flex gap-6">
           <span className="text-lg font-semibold">Portal de Eventos</span>
         </nav>
-
         <button
-          onClick={() => setTipoAcesso('restrito') || setModalAberto(true)}
+          onClick={() => { setTipoAcesso('restrito') || setModalAberto(true) }}
           className="bg-gray-800 hover:bg-gray-700 text-sm px-4 py-2 rounded transition"
         >
           Acesso Restrito
         </button>
       </header>
+
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8"b>
+        {categorias.map((categoria.index) => (
+          <div key={index} className="bg-white rounded-xl dhadow-md overflow-hiden hover:shadow-lg transition">
+            <div className="p-6">
+              <div className="bg-gray-200 h-48 rounded-lg mb-4 flex items-center justify-center text-gray-500">
+                Imagem {categoria.nome}
+              </div>
+              <h3 className="text-xl font-bold text-gray-800 mb-2">{categoria.nome}</h3>
+              <p className="text-gray-600 mb-4">{categoria.descricao}</p>
+              <button className="w-full py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition">
+                Explorar
+              </button>
+              </div>
+            </div>
+        ))}
+      </div>"
+    </div>
+
+    {/* Modal Restrito */}
+    {modalAberto && tipoAcesso === 'restrito' && (
+      <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+        <div class ="bg-white rounded-lg p-8 shadow-lg w-96">
+        {!codigoValido ? (
+          <>
+          <h2 className="text-2xl font-semibold mb-4 text-gray-700">Código de Acesso</h2>
+          <input
+            type="text"
+            placeholder="Digite o Código"</></div> {
+          constructor(parameters) {
+            
+          }
+        }
+    }
 
       <div className="flex flex-col items-center mb-12">
         <h1 className="text-4xl font-bold text-gray-800 mb-4">Portal de Eventos</h1>
