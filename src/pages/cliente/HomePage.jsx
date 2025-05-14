@@ -1,12 +1,17 @@
 // src/pages/cliente/HomePage.jsx
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios'; // Ou sua biblioteca de HTTP preferida
 
 export default function HomePage() {
+  const navigate = useNavigate();
   const [modalAberto, setModalAberto] = useState(false);
-  const [tipoAcesso, setTipoAcesso] = useState('cliente'); // usuário final
-  const [codigoAcesso, setCodigoAcesso] = useState(''); // código de acesso restrito (interno)
-  const [codigoValido, setCodigoValido] = useState(false); // código de acesso restrito válido
-  const [credenciais, setCredenciais] = useState({ email: '', senha: '' }); // credenciais de acesso restrito
+  const [tipoAcesso, setTipoAcesso] = useState('cliente');
+  const [codigoAcesso, setCodigoAcesso] = useState('');
+  const [codigoValido, setCodigoValido] = useState(false);
+  const [credenciais, setCredenciais] = useState({ email: '', senha: '' });
+  const [loading, setLoading] = useState(false);
+  const [erro, setErro] = useState('');
 
   const categorias = [
     { id: 1, nome: 'Shows', descricao: "Festivais e Eventos Musicais" },
@@ -17,20 +22,58 @@ export default function HomePage() {
     { id: 6, nome: 'Eventos', descricao: "Feiras e Exposições Variados" },
   ];
 
-const handleRestritoLogin = () => {
-  // 🔌 Conexão: Aqui será validado com backend futuramente
-  if (codigoAcesso === 'restrito123') {
-    setCodigoValido(true);
-  } else {
-    alert('Código de acesso inválido!');
+  const validarCodigoAcesso = async () => {
+    try {
+      setLoading(true);
+      setErro('');
+      
+      const response = await axios.post('/api/validar-codigo', { codigo: codigoAcesso });
+      
+      if (response.data.valido) {
+        setCodigoValido(true);
+      } else {
+        setErro('Código de acesso inválido!');
+      }
+    } catch (error) {
+      setErro('Erro ao validar código. Tente novamente.');
+      console.error('Erro na validação:', error);
+    } finally {
+      setLoading(false);
+    }
   };
 
-const handleCredenciaisSubmit = () => {
-  // 🔌 Conexão: Aqui será validado com backend futuramente
-  console.log('Login restrito com:', credenciais);
-  // Redirecionar para a página/ painel restrito (exe: /restrito/dashboard)
-  window.location.href = '/restrito/dashboard';
-};
+  const handleLoginRestrito = async () => {
+    if (!credenciais.email || !credenciais.senha) {
+      setErro('Preencha todos os campos');
+      return;
+    }
+
+    try {
+      setLoading(true);
+      setErro('');
+      
+      const response = await axios.post('/api/login-restrito', credenciais);
+      
+      if (response.data.autenticado) {
+        navigate('/restrito/dashboard');
+      } else {
+        setErro('Credenciais inválidas');
+      }
+    } catch (error) {
+      setErro('Erro no login. Tente novamente.');
+      console.error('Erro no login:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const fecharModal = () => {
+    setModalAberto(false);
+    setCodigoAcesso('');
+    setCodigoValido(false);
+    setCredenciais({ email: '', senha: '' });
+    setErro('');
+  };
 
   return (
     <div className="min-h-screen bg-gray-100 p-6">
@@ -40,50 +83,20 @@ const handleCredenciaisSubmit = () => {
           <span className="text-lg font-semibold">Portal de Eventos</span>
         </nav>
         <button
-          onClick={() => { setTipoAcesso('restrito') || setModalAberto(true) }}
+          onClick={() => {
+            setTipoAcesso('restrito');
+            setModalAberto(true);
+          }}
           className="bg-gray-800 hover:bg-gray-700 text-sm px-4 py-2 rounded transition"
+          aria-label="Acesso restrito"
         >
           Acesso Restrito
         </button>
       </header>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8"b>
-        {categorias.map((categoria.index) => (
-          <div key={index} className="bg-white rounded-xl dhadow-md overflow-hiden hover:shadow-lg transition">
-            <div className="p-6">
-              <div className="bg-gray-200 h-48 rounded-lg mb-4 flex items-center justify-center text-gray-500">
-                Imagem {categoria.nome}
-              </div>
-              <h3 className="text-xl font-bold text-gray-800 mb-2">{categoria.nome}</h3>
-              <p className="text-gray-600 mb-4">{categoria.descricao}</p>
-              <button className="w-full py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition">
-                Explorar
-              </button>
-              </div>
-            </div>
-        ))}
-      </div>"
-    </div>
-
-    {/* Modal Restrito */}
-    {modalAberto && tipoAcesso === 'restrito' && (
-      <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-        <div class ="bg-white rounded-lg p-8 shadow-lg w-96">
-        {!codigoValido ? (
-          <>
-          <h2 className="text-2xl font-semibold mb-4 text-gray-700">Código de Acesso</h2>
-          <input
-            type="text"
-            placeholder="Digite o Código"</></div> {
-          constructor(parameters) {
-            
-          }
-        }
-    }
-
+      {/* Conteúdo Principal */}
       <div className="flex flex-col items-center mb-12">
         <h1 className="text-4xl font-bold text-gray-800 mb-4">Portal de Eventos</h1>
-        {/* Botões de Acesso */}
         <div className="flex gap-4 mb-6">
           <button
             onClick={() => setTipoAcesso('cliente')}
@@ -92,13 +105,8 @@ const handleCredenciaisSubmit = () => {
             Acesso Cliente
           </button>
         </div>
-        <button
-          onClick={() => setModalAberto(true)}
-          className="px-6 py-2 bg-blue-600 text-white rounded-full shadow hover:bg-blue-700 transition"
-        >
-          Entrar / Cadastrar
-        </button>
       </div>
+
       {/* Seção de Cards */}
       <div className="max-w-6xl mx-auto">
         <h2 className="text-3xl font-bold text-center text-gray-800 mb-4">
@@ -108,27 +116,27 @@ const handleCredenciaisSubmit = () => {
           Shows, Palestras, Teatro, Esportes, Filmes e muito mais! Tudo ao Teu Alcance.<br />
           Nunca foi tão fácil participar e fazer presença.
         </p>
-        {/* Grid de Cards */}
+        
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {categorias.map((categoria) => (
             <div
               key={categoria.id}
-              className="backdrop-blur-sm bg-white/80 border border-white/20 shadow-xl rounded-2xl overflow-hidden transition-all hover:shadow-2xl"
+              className="bg-white border border-gray-200 shadow-lg rounded-xl overflow-hidden transition-all hover:shadow-xl"
             >
-              {/* Área da Imagem */}
               <div className="h-48 bg-gradient-to-br from-blue-100 to-purple-100 flex items-center justify-center">
                 <span className="text-gray-600 text-lg">Imagem {categoria.nome}</span>
               </div>
-
-              {/* Área de Conteúdo */}
-              <div className="bg-white/90 p-6 backdrop-blur-xs">
+              <div className="p-6">
                 <h3 className="text-xl font-bold text-gray-800 text-center mb-2">
                   {categoria.nome}
                 </h3>
                 <p className="text-gray-600 text-sm text-center mb-4">
                   {categoria.descricao}
                 </p>
-                <button className="w-full py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors shadow-md">
+                <button 
+                  className="w-full py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+                  onClick={() => navigate(`/categoria/${categoria.id}`)}
+                >
                   Explorar
                 </button>
               </div>
@@ -136,37 +144,71 @@ const handleCredenciaisSubmit = () => {
           ))}
         </div>
       </div>
-      {/* Modal */}
-      {modalAberto && (
+
+      {/* Modal Restrito */}
+      {modalAberto && tipoAcesso === 'restrito' && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
           <div className="bg-white rounded-lg p-8 shadow-lg w-96">
-            <h2 className="text-2xl font-semibold mb-4 text-gray-700">
-              {tipoAcesso === 'cliente' ? 'Acesso Cliente' : 'Acesso restrito'}
-            </h2>
-            <input
-              type="email"
-              placeholder="Email"
-              className="w-full p-2 border border-gray-300 rounded mb-3"
-            />
-            <input
-              type="password"
-              placeholder="Senha"
-              className="w-full p-2 border border-gray-300 rounded mb-4"
-            />
-            <button className="w-full py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition mb-4">
-              Entrar
-            </button>
-            <div className="flex justify-between items-center">
-              <button className="text-sm text-blue-600 hover:underline">
-                Criar conta
-              </button>
-              <button
-                className="text-sm text-gray-600 hover:underline"
-                onClick={() => setModalAberto(false)}
-              >
-                Fechar
-              </button>
-            </div>
+            {!codigoValido ? (
+              <>
+                <h2 className="text-2xl font-semibold mb-4 text-gray-700">Código de Acesso</h2>
+                <input
+                  type="password"
+                  placeholder="Digite o Código"
+                  value={codigoAcesso}
+                  onChange={(e) => setCodigoAcesso(e.target.value)}
+                  className="w-full p-2 border border-gray-300 rounded mb-4"
+                  onKeyPress={(e) => e.key === 'Enter' && validarCodigoAcesso()}
+                />
+                {erro && <p className="text-red-500 text-sm mb-2">{erro}</p>}
+                <button
+                  onClick={validarCodigoAcesso}
+                  disabled={loading}
+                  className="w-full py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition mb-2 disabled:opacity-50"
+                >
+                  {loading ? 'Validando...' : 'Validar Código'}
+                </button>
+                <button
+                  onClick={fecharModal}
+                  className="w-full text-sm text-gray-600 hover:underline"
+                >
+                  Cancelar
+                </button>
+              </>
+            ) : (
+              <>
+                <h2 className="text-2xl font-semibold mb-4 text-gray-700">Login Restrito</h2>
+                <input
+                  type="email"
+                  placeholder="Email"
+                  value={credenciais.email}
+                  onChange={(e) => setCredenciais({ ...credenciais, email: e.target.value })}
+                  className="w-full p-2 border border-gray-300 rounded mb-3"
+                />
+                <input
+                  type="password"
+                  placeholder="Senha"
+                  value={credenciais.senha}
+                  onChange={(e) => setCredenciais({ ...credenciais, senha: e.target.value })}
+                  className="w-full p-2 border border-gray-300 rounded mb-4"
+                  onKeyPress={(e) => e.key === 'Enter' && handleLoginRestrito()}
+                />
+                {erro && <p className="text-red-500 text-sm mb-2">{erro}</p>}
+                <button
+                  onClick={handleLoginRestrito}
+                  disabled={loading}
+                  className="w-full py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition mb-2 disabled:opacity-50"
+                >
+                  {loading ? 'Entrando...' : 'Entrar'}
+                </button>
+                <button
+                  onClick={fecharModal}
+                  className="w-full text-sm text-gray-600 hover:underline"
+                >
+                  Cancelar
+                </button>
+              </>
+            )}
           </div>
         </div>
       )}
