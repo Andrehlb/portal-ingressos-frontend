@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios'; // Ou sua biblioteca de HTTP preferida
+import CategoriaCard from '../../components/CategoriaCard';
 
 export default function HomePage() {
   const navigate = useNavigate();
@@ -117,30 +118,9 @@ export default function HomePage() {
           Nunca foi tão fácil participar e fazer presença.
         </p>
         
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
           {categorias.map((categoria) => (
-            <div
-              key={categoria.id}
-              className="bg-white border border-gray-200 shadow-lg rounded-xl overflow-hidden transition-all hover:shadow-xl"
-            >
-              <div className="h-48 bg-gradient-to-br from-blue-100 to-purple-100 flex items-center justify-center">
-                <span className="text-gray-600 text-lg">Imagem {categoria.nome}</span>
-              </div>
-              <div className="p-6">
-                <h3 className="text-xl font-bold text-gray-800 text-center mb-2">
-                  {categoria.nome}
-                </h3>
-                <p className="text-gray-600 text-sm text-center mb-4">
-                  {categoria.descricao}
-                </p>
-                <button 
-                  className="w-full py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
-                  onClick={() => navigate(`/categoria/${categoria.id}`)}
-                >
-                  Explorar
-                </button>
-              </div>
-            </div>
+            <CategoriaCard key={categoria.id} categoria={categoria} />
           ))}
         </div>
       </div>
