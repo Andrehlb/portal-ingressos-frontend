@@ -12,8 +12,8 @@ export default function CategoriaCard({ categoria }) {
 
     return (
         <div
-            className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition hover:scale-[1.02] cursor-pointer"
             onClick={handleClick}
+            className="bg-white border border-gray-200 shadow-lg rounded-xl overflow-hidden transition-all hover:shadow-xl hover:scale-[1.02] cursor-pointer"
         >
             <div className="p-6">
                 {/* Imagem fictícia */}
