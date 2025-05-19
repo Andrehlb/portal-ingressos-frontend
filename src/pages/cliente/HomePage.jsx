@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import CategoriaCard from '../../components/CategoriaCard';
+import BarraPesquisa from '../../components/BarraPesquisa';
 
 export default function HomePage() {
   const [modalVisitante, setModalVisitante] = useState(false);
@@ -137,6 +138,13 @@ export default function HomePage() {
             Nunca foi tão fácil participar e fazer presença.
           </p>
         </div>
+
+        <BarraPesquisa
+          onSearch={valor => {/* Lógica para filtar cards/categorias/eventos futuramente */}}
+          sugestoes={[
+            "hoje", "amanhã", "nesta semana", "neste fim de semana", "semana que vem", "neste mês", "próximo mês",
+          ]}
+        />
 
         {/* GRID DE CARDS */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
