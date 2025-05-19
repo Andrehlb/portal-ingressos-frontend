@@ -1,19 +1,12 @@
-// src/pages/cliente/HomePage.jsx
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import axios from 'axios'; // Ou sua biblioteca de HTTP preferida
 import CategoriaCard from '../../components/CategoriaCard';
 
 export default function HomePage() {
-  const navigate = useNavigate();
-  const [modalAberto, setModalAberto] = useState(false);
-  const [tipoAcesso, setTipoAcesso] = useState('cliente');
-  const [codigoAcesso, setCodigoAcesso] = useState('');
-  const [codigoValido, setCodigoValido] = useState(false);
-  const [credenciais, setCredenciais] = useState({ email: '', senha: '' });
-  const [loading, setLoading] = useState(false);
-  const [erro, setErro] = useState('');
+  const [modalVisitante, setModalVisitante] = useState(false);
+  const [modalRestrito, setModalRestrito] = useState(false);
+  const [modoCadastro, setModoCadastro] = useState(false); // Alterna entre login/cadastro do visitante
 
+  // Dados simulados para categorias (com id profissional)
   const categorias = [
     { id: 1, nome: 'Shows', descricao: "Festivais e Eventos Musicais" },
     { id: 2, nome: 'Palestras', descricao: "Eventos corporativos e Educacionais" },
@@ -23,175 +16,139 @@ export default function HomePage() {
     { id: 6, nome: 'Eventos', descricao: "Feiras e Exposições Variados" },
   ];
 
-  const validarCodigoAcesso = async () => {
-    try {
-      setLoading(true);
-      setErro('');
-      
-      const response = await axios.post('/api/validar-codigo', { codigo: codigoAcesso });
-      
-      if (response.data.valido) {
-        setCodigoValido(true);
-      } else {
-        setErro('Código de acesso inválido!');
-      }
-    } catch (error) {
-      setErro('Erro ao validar código. Tente novamente.');
-      console.error('Erro na validação:', error);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const handleLoginRestrito = async () => {
-    if (!credenciais.email || !credenciais.senha) {
-      setErro('Preencha todos os campos');
-      return;
-    }
-
-    try {
-      setLoading(true);
-      setErro('');
-      
-      const response = await axios.post('/api/login-restrito', credenciais);
-      
-      if (response.data.autenticado) {
-        navigate('/restrito/dashboard');
-      } else {
-        setErro('Credenciais inválidas');
-      }
-    } catch (error) {
-      setErro('Erro no login. Tente novamente.');
-      console.error('Erro no login:', error);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const fecharModal = () => {
-    setModalAberto(false);
-    setCodigoAcesso('');
-    setCodigoValido(false);
-    setCredenciais({ email: '', senha: '' });
-    setErro('');
-  };
-
   return (
-    <div className="min-h-screen bg-gray-100 p-6">
-      {/* Cabeçalho */}
-      <header className="bg-gray-900 text-white flex justify-between items-center px-6 py-4 mb-4">
-        <nav className="flex gap-6">
-          <span className="text-lg font-semibold">Portal de Eventos</span>
+    <div className="min-h-screen pb-20 bg-gradient-to-br from-slate-100 to-blue-50">
+      {/* NAVBAR */}
+      <header className="w-full bg-white/70 shadow-lg backdrop-blur sticky top-0 z-40">
+        <nav className="max-w-6xl mx-auto flex items-center justify-between px-4 py-2">
+          {/* Logo / Título */}
+          <span className="font-extrabold text-2xl text-blue-900 drop-shadow select-none">
+            Portal de Eventos
+          </span>
+
+          {/* Botões de acesso */}
+          <div className="flex gap-3">
+            {/* Acesso Visitante */}
+            <button
+              onClick={() => { setModoCadastro(false); setModalVisitante(true); }}
+              className="bg-blue-600 hover:bg-blue-800 transition text-white px-6 py-2 rounded-full font-semibold shadow-md text-base"
+            >
+              Acesso Visitante
+            </button>
+            {/* Acesso Restrito (Gerente/Admin) */}
+            <button
+              onClick={() => setModalRestrito(true)}
+              className="border border-blue-600 text-blue-700 hover:bg-blue-50 transition px-5 py-2 rounded-full text-sm font-semibold shadow-sm"
+            >
+              Acesso Restrito
+            </button>
+          </div>
         </nav>
-        <button
-          onClick={() => {
-            setTipoAcesso('restrito');
-            setModalAberto(true);
-          }}
-          className="bg-gray-800 hover:bg-gray-700 text-sm px-4 py-2 rounded transition"
-          aria-label="Acesso restrito"
-        >
-          Acesso Restrito
-        </button>
       </header>
 
-      {/* Conteúdo Principal */}
-      <div className="flex flex-col items-center mb-12">
-        <h1 className="text-4xl font-bold text-gray-800 mb-4">Portal de Eventos</h1>
-        <div className="flex gap-4 mb-6">
-          <button
-            onClick={() => setTipoAcesso('cliente')}
-            className={`px-6 py-2 rounded-full shadow transition ${tipoAcesso === 'cliente' ? 'bg-blue-600 text-white' : 'bg-gray-200 text-gray-700'}`}
-          >
-            Acesso Cliente
-          </button>
-        </div>
-      </div>
-
-      {/* Seção de Cards */}
-      <div className="max-w-6xl mx-auto">
-        <h2 className="text-3xl font-bold text-center text-gray-800 mb-4">
-          Descubra o Mundo de Eventos que Esperam por Você
-        </h2>
-        <p className="text-center text-gray-600 mb-8">
-          Shows, Palestras, Teatro, Esportes, Filmes e muito mais! Tudo ao Teu Alcance.<br />
-          Nunca foi tão fácil participar e fazer presença.
-        </p>
-        
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-          {categorias.map((categoria) => (
-            <CategoriaCard key={categoria.id} categoria={categoria} />
-          ))}
-        </div>
-      </div>
-
-      {/* Modal Restrito */}
-      {modalAberto && tipoAcesso === 'restrito' && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-          <div className="bg-white rounded-lg p-8 shadow-lg w-96">
-            {!codigoValido ? (
+      {/* MODAL VISITANTE */}
+      {modalVisitante && (
+        <div className="fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center z-50">
+          <div className="bg-white rounded-2xl shadow-xl p-8 w-96">
+            {/* Alterna entre login e cadastro */}
+            <h2 className="text-xl font-bold mb-4 text-blue-900">
+              {modoCadastro ? 'Cadastrar Novo Usuário' : 'Acesso Visitante'}
+            </h2>
+            <input className="w-full p-2 border border-gray-300 rounded mb-3" placeholder="E-mail" />
+            {!modoCadastro && (
+              <input className="w-full p-2 border border-gray-300 rounded mb-4" placeholder="Senha" type="password" />
+            )}
+            {modoCadastro && (
               <>
-                <h2 className="text-2xl font-semibold mb-4 text-gray-700">Código de Acesso</h2>
-                <input
-                  type="password"
-                  placeholder="Digite o Código"
-                  value={codigoAcesso}
-                  onChange={(e) => setCodigoAcesso(e.target.value)}
-                  className="w-full p-2 border border-gray-300 rounded mb-4"
-                  onKeyPress={(e) => e.key === 'Enter' && validarCodigoAcesso()}
-                />
-                {erro && <p className="text-red-500 text-sm mb-2">{erro}</p>}
-                <button
-                  onClick={validarCodigoAcesso}
-                  disabled={loading}
-                  className="w-full py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition mb-2 disabled:opacity-50"
-                >
-                  {loading ? 'Validando...' : 'Validar Código'}
-                </button>
-                <button
-                  onClick={fecharModal}
-                  className="w-full text-sm text-gray-600 hover:underline"
-                >
-                  Cancelar
-                </button>
-              </>
-            ) : (
-              <>
-                <h2 className="text-2xl font-semibold mb-4 text-gray-700">Login Restrito</h2>
-                <input
-                  type="email"
-                  placeholder="Email"
-                  value={credenciais.email}
-                  onChange={(e) => setCredenciais({ ...credenciais, email: e.target.value })}
-                  className="w-full p-2 border border-gray-300 rounded mb-3"
-                />
-                <input
-                  type="password"
-                  placeholder="Senha"
-                  value={credenciais.senha}
-                  onChange={(e) => setCredenciais({ ...credenciais, senha: e.target.value })}
-                  className="w-full p-2 border border-gray-300 rounded mb-4"
-                  onKeyPress={(e) => e.key === 'Enter' && handleLoginRestrito()}
-                />
-                {erro && <p className="text-red-500 text-sm mb-2">{erro}</p>}
-                <button
-                  onClick={handleLoginRestrito}
-                  disabled={loading}
-                  className="w-full py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition mb-2 disabled:opacity-50"
-                >
-                  {loading ? 'Entrando...' : 'Entrar'}
-                </button>
-                <button
-                  onClick={fecharModal}
-                  className="w-full text-sm text-gray-600 hover:underline"
-                >
-                  Cancelar
-                </button>
+                <input className="w-full p-2 border border-gray-300 rounded mb-3" placeholder="Nome Completo" />
+                <input className="w-full p-2 border border-gray-300 rounded mb-4" placeholder="Senha" type="password" />
               </>
             )}
+
+            <button className="w-full py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition mb-2">
+              {modoCadastro ? 'Cadastrar' : 'Entrar'}
+            </button>
+            <button
+              className="w-full text-sm text-blue-600 hover:underline"
+              onClick={() => setModalVisitante(false)}
+            >
+              Fechar
+            </button>
+            <div className="mt-2 text-center">
+              {modoCadastro
+                ? (
+                  <span
+                    className="text-sm text-gray-500 hover:underline cursor-pointer"
+                    onClick={() => setModoCadastro(false)}
+                  >
+                    Já tem conta? Entrar
+                  </span>
+                ) : (
+                  <span
+                    className="text-sm text-gray-500 hover:underline cursor-pointer"
+                    onClick={() => setModoCadastro(true)}
+                  >
+                    Novo por aqui? Cadastrar
+                  </span>
+                )}
+            </div>
           </div>
         </div>
       )}
+
+      {/* MODAL RESTRITO (Gerente/Admin) */}
+      {modalRestrito && (
+        <div className="fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center z-50">
+          <div className="bg-white rounded-2xl shadow-xl p-8 w-96">
+            <h2 className="text-xl font-bold mb-4 text-blue-900">Acesso Restrito</h2>
+            <input className="w-full p-2 border border-gray-300 rounded mb-3" placeholder="Código de Acesso ou E-mail Admin" />
+            <input className="w-full p-2 border border-gray-300 rounded mb-4" placeholder="Senha" type="password" />
+            <button className="w-full py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition mb-2">
+              Entrar
+            </button>
+            <button
+              className="w-full text-sm text-blue-600 hover:underline"
+              onClick={() => setModalRestrito(false)}
+            >
+              Fechar
+            </button>
+            {/* Cadastrar novo gerente */}
+            <div className="mt-2 text-center">
+              <span
+                className="text-sm text-gray-500 hover:underline cursor-pointer"
+                // Futuro: abrir modal/fluxo de cadastro de novo gerente/admin/agente
+                onClick={() => alert('Em construção o Fluxo de cadastro de novo gerente/admin/agente')}
+              >
+                Cadastrar novo Gerente/Admin
+              </span>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* CONTEÚDO CENTRAL */}
+      <main className="max-w-6xl mx-auto px-4">
+        <div className="text-center mt-12 mb-10">
+          <h2 className="text-3xl font-bold text-gray-800 mb-3">
+            Descubra o Mundo de Eventos que Esperam por Você
+          </h2>
+          <p className="text-gray-600 text-lg max-w-2xl mx-auto leading-relaxed">
+            Shows, Palestras, Teatro, Esportes, Filmes e muito mais!<br />
+            Nunca foi tão fácil participar e fazer presença.
+          </p>
+        </div>
+
+        {/* GRID DE CARDS */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
+          {categorias.map((categoria) => (
+            <CategoriaCard
+              key={categoria.id}
+              nome={categoria.nome}
+              descricao={categoria.descricao}
+            />
+          ))}
+        </div>
+      </main>
     </div>
   );
 }
