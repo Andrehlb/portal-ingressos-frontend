@@ -20,7 +20,7 @@ export default function HomePage() {
   return (
     <>
       {/* Header principal do Portal de Vendas */}
-      <header className="sticky top-0 z-50 bg-white shadow flex items-center justify-between px-8 py-3">
+      <header className="sticky top-0 z-50 bg-white/40 backdrop-blur-md shadow flex items-center justify-between px-8 py-3">
         <div className="flex items-center gap-4">
           {/* Logo / Título */}
           <span className="text-xl font-bold text-blue-900">Portal de Eventos</span>
