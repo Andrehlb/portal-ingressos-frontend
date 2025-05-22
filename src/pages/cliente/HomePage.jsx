@@ -4,9 +4,12 @@ import CategoriaCard from '../../components/CategoriaCard';
 import BarraPesquisa from '../../components/BarraPesquisa';
 
 export default function HomePage() {
+  { /*Funções para abri modais */}
   const [modalVisitante, setModalVisitante] = useState(false);
   const [modalRestrito, setModalRestrito] = useState(false);
   // const [modoCadastro, setModoCadastro] = useState(false); // Alterna entre login/cadastro do visitante
+  const handleAcessoVisitante = () => setModalVisitante(true)
+  const handleAcessoRestrito = () => setModalRestrito(true)
 
   // Dados simulados para categorias (com ids)
   const categorias = [
@@ -17,17 +20,41 @@ export default function HomePage() {
     { id: 5, nome: 'Filmes', descricao: "Festivais de Cinema e Pré-Estréias" },
     { id: 6, nome: 'Eventos', descricao: "Feiras e Exposições Variados" },
   ];
+  
+  {/* Função para abrir o modal de acesso do visitante */}
+  {/*
+  function handleAcessoVisitante() {
+    setModalVisitante(true)
+  }
+
+  function handleAcessoRestrito() {
+    setModalRestrito(true)
+  }
+*/}
+
 
   return (
     <>
       <Header
+        onAcessoVisitante={handleAcessoVisitante}
+        onAcessoRestrito={handleAcessoRestrito}
+      >
+      {/* Função inline * /}
+      <Header
         onAcessoVisitante={() => setModalVisitante(true)}
         onAcessoRestrito={() => setModalRestrito(true)}
       >
-        {/* Barra de Pesquisa fica centralizada na faixa branca sticky */}
+        /* Barra de Pesquisa fica centralizada na faixa branca sticky * /}
         <BarraPesquisa
           onSearch={() => {}}
           sugestoes={["hoje", "amanhã", "nesta semana", ...outraListaSugestoes]}
+        />
+      </Header>
+      */}
+        {/* Barra de Pesquisa fica centralizada na faixa branca sticky */}
+        <BarraPesquisa
+          onSearch={() => {}}
+          sugestoes={["hoje", "amanhã", "nesta semana", "neste fim de semana", "semana que vem", "neste mês", "próximo mês"]}
         />
       </Header>
     {/*

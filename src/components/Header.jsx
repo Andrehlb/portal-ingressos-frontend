@@ -30,6 +30,7 @@ export default function Header({
             Portal de Eventos
           </span>
           <button
+            type="button"
             className="ml-4 px-4 py-2 rounded-full bg-blue-600 text-white font-medium hover:bg-blue-700 transition"
             onClick={onAcessoVisitante}
           >
@@ -47,6 +48,7 @@ export default function Header({
           <a href="/" className="text-gray-700 hover:underline text-base">Página Inicial</a>
           <a href="/eventos/cadastro" className="text-gray-700 hover:underline text-base">Cadastro de Evento</a>
           <button
+            type="button"
             className="border border-blue-600 text-blue-600 px-5 py-2 rounded-full font-semibold hover:bg-blue-50 transition"
             onClick={onAcessoRestrito}
           >
