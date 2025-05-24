@@ -82,7 +82,7 @@ coverage/
 .temp/
 
 # Windows
-
+*.txt
 
 
 
