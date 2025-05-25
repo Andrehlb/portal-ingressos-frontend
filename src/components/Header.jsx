@@ -23,7 +23,7 @@ export default function Header({
         transition-all
       "
     >
-      <div className="flex items-center justify-between w-full">
+      <div className="flex items-center justify-between gap-4 w-full">
         {/* ESQUERDA: Logo + Acesso Visitante */}
         <div className="flex items-center gap-4">
           <span className="text-2xl font-bold text-blue-900 drop-shadow select-none">
