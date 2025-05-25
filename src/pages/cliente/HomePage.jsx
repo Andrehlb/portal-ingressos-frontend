@@ -7,9 +7,7 @@ export default function HomePage() {
   { /*Funções para abri modais */}
   const [modalVisitante, setModalVisitante] = useState(false);
   const [modalRestrito, setModalRestrito] = useState(false);
-  // const [modoCadastro, setModoCadastro] = useState(false); // Alterna entre login/cadastro do visitante
-  const handleAcessoVisitante = () => setModalVisitante(true)
-  const handleAcessoRestrito = () => setModalRestrito(true)
+  const [modoCadastro, setModoCadastro] = useState(false); // Alterna entre login/cadastro do visitante
 
   // Dados simulados para categorias (com ids)
   const categorias = [
@@ -20,67 +18,21 @@ export default function HomePage() {
     { id: 5, nome: 'Filmes', descricao: "Festivais de Cinema e Pré-Estréias" },
     { id: 6, nome: 'Eventos', descricao: "Feiras e Exposições Variados" },
   ];
-  
-  {/* Função para abrir o modal de acesso do visitante */}
-  {/*
-  function handleAcessoVisitante() {
-    setModalVisitante(true)
-  }
-
-  function handleAcessoRestrito() {
-    setModalRestrito(true)
-  }
-*/}
-
 
   return (
     <>
+      {/* Função inline - Header com barra de pesquisa centralizada */}
       <Header
-        onAcessoVisitante={handleAcessoVisitante}
-        onAcessoRestrito={handleAcessoRestrito}
-      >
-      {/* Função inline * /}
-      <Header
-        onAcessoVisitante={() => setModalVisitante(true)}
+        onAcessoVisitante={() => { setModoCadastro(false); setModalVisitante(true); }}
         onAcessoRestrito={() => setModalRestrito(true)}
       >
-        /* Barra de Pesquisa fica centralizada na faixa branca sticky * /}
-        <BarraPesquisa
-          onSearch={() => {}}
-          sugestoes={["hoje", "amanhã", "nesta semana", ...outraListaSugestoes]}
-        />
-      </Header>
-      */}
-        {/* Barra de Pesquisa fica centralizada na faixa branca sticky */}
+        {/* Barra de pesquisa */}
         <BarraPesquisa
           onSearch={() => {}}
           sugestoes={["hoje", "amanhã", "nesta semana", "neste fim de semana", "semana que vem", "neste mês", "próximo mês"]}
         />
       </Header>
-    {/*
-      / Header principal do Portal de Vendas /
-      <header className="sticky top-0 z-50 bg-white/40 backdrop-blur-md shadow flex items-center justify-between px-8 py-3">
-        <div className="flex items-center gap-4">
-          * Logo / Título *
-          <span className="text-xl font-bold text-blue-900">Portal de Eventos</span>
-          <button className="ml-4 px-4 py-1 rounded-full bg-blue-600 text-white font-medium hover:bg-blue-700 transition">
-            Acesso Visitante
-          </button>
-        </div>
-        <nav className="flex items-center gap-6">
-          <a href="/" className="text-gray-600 text-sm hover:ubderline">Página Inicial</a>
-          <a href="/eventos/cadastro" className="text-gray-600 text-sm hover:underline">Cadastro e Eventos</a>
-          * Acesso Restrito (Gerente/Admin) *
-          <button className="border border-blue-600 text-blue-700 hover:bg-blue-50 transition px-5 py-2 rounded-full text-sm font-semibold shadow-sm">
-            Acesso Restrito
-          </button>
-        </nav>
-      </header>
-    */}
-
-      {/* Conteúdo Principal (títulos, pesquisa, cards, etc.) */}
-      <main className="flex flex-col items-center mt-8">
-
+      {/* Modais */}
         {/* MODAL VISITANTE */}
         {modalVisitante && (
           <div className="fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center z-50">
@@ -160,7 +112,8 @@ export default function HomePage() {
             </div>
           </div>
         )}
-
+      {/* Conteúdo Principal (títulos, pesquisa, cards, etc.) */}
+      <main className="flex flex-col items-center mt-8">
         {/* CONTEÚDO CENTRAL */}
         <main className="max-w-6xl mx-auto px-4">
           <div className="text-center mt-12 mb-10">
@@ -172,13 +125,6 @@ export default function HomePage() {
               Nunca foi tão fácil participar e fazer presença.
             </p>
           </div>
-
-          <BarraPesquisa
-            onSearch={valor => {/* Lógica para filtar cards/categorias/eventos futuramente */ }}
-            sugestoes={[
-              "hoje", "amanhã", "nesta semana", "neste fim de semana", "semana que vem", "neste mês", "próximo mês",
-            ]}
-          />
 
           {/* GRID DE CARDS */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
