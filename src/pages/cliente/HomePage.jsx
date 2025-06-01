@@ -3,8 +3,6 @@ import HeaderGlassFlexible from '../../components/HeaderGlassFlexible';
 import BarraPesquisa from '../../components/BarraPesquisa';
 import CategoriaCard from '../../components/CategoriaCard';
 
-
-
 export default function HomePage() {
   { /*Funções para abri modais */}
   const [modalVisitante, setModalVisitante] = useState(false);
