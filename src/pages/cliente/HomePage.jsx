@@ -22,9 +22,10 @@ export default function HomePage() {
   return (
     <>
       <HeaderGlassFlexible>
-        <span className="font-bold text 2x1 text-blue-900 mx-1"> Portal de Eventos </span>
-        <button className="mx-2 bg-blue-600 text-white px-2 py-0 rounded full shadow hover:bg-blue-700 transition"> Acesso Visitante </button>
+        <span className="font-bold text 2x1 text-blue-900 mx-1 tracking-tight drop-sharow"> Portal de Eventos </span>
+        <button className="mx-2 border-2 bg-blue-600 text-white px-2 py-0 rounded-full shadow hover:bg-blue-700 transition"> Acesso Visitante </button>
         <BarraPesquisa className="mx-2" />
+        <button className="mx-2 border-2 bg-blue-600 text-white px-2 py-0 rounded-full shadow hover:bg-blue-700 transition"> Acesso Restrito </button>
       </HeaderGlassFlexible>
       {/* Modais */}
         {/* MODAL VISITANTE */}
