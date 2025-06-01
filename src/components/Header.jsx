@@ -15,7 +15,7 @@ export default function Header({
       className="
         sticky top-0 z-50
         min-h-[0rem]
-        px-8 py-0
+        px-8 py-2
         bg-white/80
         backdrop-blur-md
         border-b border-slate-200

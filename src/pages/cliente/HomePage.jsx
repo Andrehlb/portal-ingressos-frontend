@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import Header from '../../components/Header';
 import CategoriaCard from '../../components/CategoriaCard';
 import BarraPesquisa from '../../components/BarraPesquisa';
+import HeaderGlassFlexible from '../../components/HeaderGlassFlexible';
 
 export default function HomePage() {
   { /*Funções para abri modais */}
@@ -21,17 +22,11 @@ export default function HomePage() {
 
   return (
     <>
-      {/* Função inline - Header com barra de pesquisa centralizada */}
-      <Header
-        onAcessoVisitante={() => { setModoCadastro(false); setModalVisitante(true); }}
-        onAcessoRestrito={() => setModalRestrito(true)}
-      >
-        {/* Barra de pesquisa */}
-        <BarraPesquisa
-          onSearch={() => {}}
-          sugestoes={["hoje", "amanhã", "nesta semana", "neste fim de semana", "semana que vem", "neste mês", "próximo mês"]}
-        />
-      </Header>
+      <HeaderGlassFlexible>
+        <span className="font-bold text 2x1 text-blue-900 mx-1"> Portal de Eventos </span>
+        <button className="mx-2 bg-blue-600 text-white px-2 py-0 rounded full shadow hover:bg-blue-700 transition"> Acesso Visitante </button>
+        <BarraPesquisa className="mx-2" />
+      </HeaderGlassFlexible>
       {/* Modais */}
         {/* MODAL VISITANTE */}
         {modalVisitante && (
@@ -113,11 +108,11 @@ export default function HomePage() {
           </div>
         )}
       {/* Conteúdo Principal (títulos, pesquisa, cards, etc.) */}
-      <main className="flex flex-col items-center mt-8">
+      <main className="flex flex-col items-center mt-1">
         {/* CONTEÚDO CENTRAL */}
         <main className="max-w-6xl mx-auto px-4">
-          <div className="text-center mt-12 mb-10">
-            <h2 className="text-3xl font-bold text-gray-800 mb-3">
+          <div className="text-center mt-3 mb-6">
+            <h2 className="text-3xl font-bold text-gray-800 mb-2">
               Descubra o Mundo de Eventos que Esperam por Você
             </h2>
             <p className="text-gray-600 text-lg max-w-2xl mx-auto leading-relaxed">

@@ -7,11 +7,11 @@ export default function BarraPesquisa({ onSearch, sugestoes = [] }) {
   const [showSugestoes, setShowSugestoes] = useState(false);
 
   return (
-    <div className="relative w-full max-w-xl mx-auto mt-8 mb-10">
+    <div className="relative w-full max-w-xl mx-auto mt-4 mb-5">
       <div className="flex items-center">
-        <MagnifyingGlassIcon className="w-6 h-6 text-gray-400 absolute ml-4" />
+        <MagnifyingGlassIcon className="w-6 h-5 text-gray-400 absolute ml-4" />
         <input
-          className="w-full pl-12 pr-4 py-3 rounded-full shadow border border-blue-200 focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white text-lg"
+          className="w-full pl-12 px-2 py-1.8 rounded-full shadow border border-blue-200 focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white text-lg"
           type="text"
           placeholder="Pesquisar eventos, shows, teatros, cursos..."
           value={termo}
