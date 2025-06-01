@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
-import Header from '../../components/Header';
-import CategoriaCard from '../../components/CategoriaCard';
-import BarraPesquisa from '../../components/BarraPesquisa';
 import HeaderGlassFlexible from '../../components/HeaderGlassFlexible';
+import BarraPesquisa from '../../components/BarraPesquisa';
+import CategoriaCard from '../../components/CategoriaCard';
+
+
 
 export default function HomePage() {
   { /*Funções para abri modais */}
