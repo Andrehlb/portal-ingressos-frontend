@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import HeaderGlassFlexible from '../../components/HeaderGlassFlexible';
 import BarraPesquisa from '../../components/BarraPesquisa';
 import CategoriaCard from '../../components/CategoriaCard';
@@ -24,7 +25,11 @@ export default function HomePage() {
       <HeaderGlassFlexible>
         <span className="font-bold text 2x1 text-blue-900 mx-1 tracking-tight drop-sharow"> Portal de Eventos </span>
         <button className="mx-2 border-2 bg-blue-600 text-white px-2 py-0 rounded-full shadow hover:bg-blue-700 transition"> Acesso Visitante </button>
-        <BarraPesquisa className="mx-2" />
+        <BarraPesquisa className="mx-4" />
+          <nav className="flex items-center gap-4 mx-2"> 
+            <Link to="/" className="text-blue-900 font-medium hover:underline"> Página Inicial </Link>
+            <a href="/eventos/cadastro" className="text-blue-900 font-medium hover:underline">Cadastro</a>
+          </nav>
         <button className="mx-2 border-2 bg-blue-600 text-white px-2 py-0 rounded-full shadow hover:bg-blue-700 transition"> Acesso Restrito </button>
       </HeaderGlassFlexible>
       {/* Modais */}

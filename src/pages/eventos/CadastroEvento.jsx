@@ -1,5 +1,6 @@
 // src/pages/eventos/CadastroEvento.jsx
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 export default function CadastroEvento() {
   const [evento, setEvento] = useState({
@@ -33,6 +34,7 @@ export default function CadastroEvento() {
 
         <button type="submit" style={{ marginTop: '1rem' }}>Cadastrar</button>
       </form>
+      <Link to="/" className="text-blue-600 font-medium text-sm hover:underline transition">Voltar para a Página Inicial</Link>
     </div>
   );
 }

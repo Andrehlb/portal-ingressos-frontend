@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 export default function Login() {
     const [codigo, setCodigo] = useState('');
@@ -44,6 +45,7 @@ export default function Login() {
 
                 <button type="submit" style={{ marginTop: '1rem' }}>Entrar</button>
             </form>
+            <Link to="/" className="text-blue-600 font-medium text-sm hover:underline transition">Voltar para a Página Inicial</Link>
         </div>
     );
 }  
