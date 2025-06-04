@@ -3,10 +3,11 @@ import { Link } from 'react-router-dom';
 import HeaderGlassFlexible from '../../components/HeaderGlassFlexible';
 import BarraPesquisa from '../../components/BarraPesquisa';
 import CategoriaCard from '../../components/CategoriaCard';
+import ModalCadastroVisitante from '../../components/ModalCadastroVisitante';
 
 export default function HomePage() {
   { /*Funções para abri modais */}
-  const [modalVisitante, setModalVisitante] = useState(false);
+  const [modalCadastroVisitante, setModalCadastroVisitante] = useState(false);
   const [modalRestrito, setModalRestrito] = useState(false);
   const [modoCadastro, setModoCadastro] = useState(false); // Alterna entre login/cadastro do visitante
 
@@ -24,7 +25,10 @@ export default function HomePage() {
     <>
       <HeaderGlassFlexible>
         <span className="font-bold text 2x1 text-blue-900 mx-1 tracking-tight drop-sharow"> Portal de Eventos </span>
-        <button className="mx-2 border-2 bg-blue-600 text-white px-2 py-0 rounded-full shadow hover:bg-blue-700 transition"> Acesso Visitante </button>
+        <button 
+          onClick={() => setModalCadastroVisitante(true)}
+          className="mx-2 border-2 bg-blue-600 text-white px-2 py-0 rounded-full shadow hover:bg-blue-700 transition"
+        > Acesso Visitante </button> {Children}
         <BarraPesquisa className="mx-4" />
           <nav className="flex items-center gap-4 mx-2"> 
             <Link to="/" className="text-blue-900 font-medium hover:underline"> Página Inicial </Link>
@@ -33,55 +37,13 @@ export default function HomePage() {
         <button className="mx-2 border-2 bg-blue-600 text-white px-2 py-0 rounded-full shadow hover:bg-blue-700 transition"> Acesso Restrito </button>
       </HeaderGlassFlexible>
       {/* Modais */}
-        {/* MODAL VISITANTE */}
-        {modalVisitante && (
-          <div className="fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center z-50">
-            <div className="bg-white rounded-2xl shadow-xl p-8 w-96">
-              {/* Alterna entre login e cadastro */}
-              <h2 className="text-xl font-bold mb-4 text-blue-900">
-                {modoCadastro ? 'Cadastrar Novo Usuário' : 'Acesso Visitante'}
-              </h2>
-              <input className="w-full p-2 border border-gray-300 rounded mb-3" placeholder="E-mail" />
-              {!modoCadastro && (
-                <input className="w-full p-2 border border-gray-300 rounded mb-4" placeholder="Senha" type="password" />
-              )}
-              {modoCadastro && (
-                <>
-                  <input className="w-full p-2 border border-gray-300 rounded mb-3" placeholder="Nome Completo" />
-                  <input className="w-full p-2 border border-gray-300 rounded mb-4" placeholder="Senha" type="password" />
-                </>
-              )}
-
-              <button className="w-full py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition mb-2">
-                {modoCadastro ? 'Cadastrar' : 'Entrar'}
-              </button>
-              <button
-                className="w-full text-sm text-blue-600 hover:underline"
-                onClick={() => setModalVisitante(false)}
-              >
-                Fechar
-              </button>
-              <div className="mt-2 text-center">
-                {modoCadastro
-                  ? (
-                    <span
-                      className="text-sm text-gray-500 hover:underline cursor-pointer"
-                      onClick={() => setModoCadastro(false)}
-                    >
-                      Já tem conta? Entrar
-                    </span>
-                  ) : (
-                    <span
-                      className="text-sm text-gray-500 hover:underline cursor-pointer"
-                      onClick={() => setModoCadastro(true)}
-                    >
-                      Novo por aqui? Cadastrar
-                    </span>
-                  )}
-              </div>
-            </div>
-          </div>
-        )}
+        {/* MODAL CADASTRO VISITANTE */}
+        <ModalCadastroVisitante
+          aberto={modalCadastroVisitante}
+          onClose={() => setModalCadastroVisitante(false)}
+          modoCadastro={modoCadastro}
+          setModoCadastro={setModoCadastro}
+        />
 
         {/* MODAL RESTRITO (Gerente/Admin) */}
         {modalRestrito && (
