@@ -28,7 +28,7 @@ export default function HomePage() {
         <button 
           onClick={() => setModalCadastroVisitante(true)}
           className="mx-2 border-2 bg-blue-600 text-white px-2 py-0 rounded-full shadow hover:bg-blue-700 transition"
-        > Acesso Visitante </button> {Children}
+        > Acesso Visitante </button> {children}
         <BarraPesquisa className="mx-4" />
           <nav className="flex items-center gap-4 mx-2"> 
             <Link to="/" className="text-blue-900 font-medium hover:underline"> Página Inicial </Link>
