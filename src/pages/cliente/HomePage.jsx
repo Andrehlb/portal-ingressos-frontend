@@ -25,7 +25,7 @@ export default function HomePage() {
   return (
     <>
       <HeaderGlassFlexible>
-        <span className=" "> Portal de Eventos </span>
+        <span className="text-blue-600 font-medium"> Portal de Eventos </span>
         <button 
           onClick={() => setModalCadastroVisitante(true)}
           className="mx-2 border-2 bg-blue-600 text-white px-2 py-0 rounded-full shadow hover:bg-blue-700 transition"
