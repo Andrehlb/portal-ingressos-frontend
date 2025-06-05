@@ -40,7 +40,7 @@ export default function HomePage() {
           className="mx-2 border-2 bg-blue-600 text-white px-2 py-0 rounded-full shadow hover:bg-blue-700 transition"> Acesso Restrito </button>
       </HeaderGlassFlexible>
       {/* Modais */}
-      {/* MODAL ACESSO RESTRITO */}{/* MODAL ACESSO RESTRITO (Gerente/Admin) */}
+      {/* MODAL ACESSO RESTRITO (Gerente/Admin) */}
         <ModalAcessoRestrito
           aberto={modalAcessoRestrito}
           onClose={() => setModalAcessoRestrito(false)}
