@@ -11,6 +11,7 @@ export default function HomePage() {
   const [modalCadastroVisitante, setModalCadastroVisitante] = useState(false);
   const [modalAcessoRestrito, setModalAcessoRestrito] = useState(false);
   const [modoCadastro, setModoCadastro] = useState(false); // Alterna entre login/cadastro do visitante
+  const [isGerente, setGerente] = useState(false); // Estado para verificar se é gerente/admin
 
   // Dados simulados para categorias (com ids)
   const categorias = [
@@ -32,8 +33,8 @@ export default function HomePage() {
         > Acesso Visitante </button>
         <BarraPesquisa className="mx-4" />
           <nav className="flex items-center gap-4 mx-2"> 
-            <Link to="/" className="text-blue-900 font-medium hover:underline"> Página Inicial </Link>
-            <a href="/eventos/cadastro" className="text-blue-900 font-medium hover:underline">Cadastro</a>
+            <Link to="/" className="text-blue-900 font-medium hover:underline">Página Inicial</Link>
+            <a href="/eventos/cadastro" className="text-blue-900 font-medium hover:underline">ʕ•́ᴥ•̀ʔっ♡</a>
           </nav>
         <button 
           onClick={() => setModalAcessoRestrito(true)}
