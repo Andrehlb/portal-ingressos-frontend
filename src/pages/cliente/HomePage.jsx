@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import Header from '../../components/Header';
 import CategoriaCard from '../../components/CategoriaCard';
 import BarraPesquisa from '../../components/BarraPesquisa';
+import ComoFunciona from '../../components/ComoFunciona';
 
 export default function HomePage() {
   { /*Funções para abri modais */}
@@ -137,6 +138,9 @@ export default function HomePage() {
             ))}
           </div>
         </main>
+
+        {/* SEÇÃO COMO FUNCIONA */}
+        <ComoFunciona />
       </main>
     </>
   );
